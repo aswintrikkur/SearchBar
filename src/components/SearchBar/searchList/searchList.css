@@ -1,0 +1,21 @@
+.search-list-container {
+	width: 100%;
+	height: 350px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	/* background-color: rgba(255, 228, 196, 0.144); */
+	overflow: auto;
+}
+.search-list-container .content {
+	background-color: rgba(78, 100, 173, 0.473);
+	padding: 10px 20px;
+	display: flex;
+	gap: 8px;
+	border-radius: 4px;
+	word-break: break-all; /* to break word overflow*/
+}
+.search-list-container .content img {
+	width: 35px;
+	height: 35px;
+}
