@@ -18,3 +18,8 @@
 }
 .search-container .title i{
 }
+.selected-content{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+}

@@ -17,6 +17,7 @@
 	gap: 16px;
 	border-radius: 4px;
 	word-break: break-all; /* to break word overflow*/
+	cursor: pointer;
 }
 .search-list-container .content img {
 	width: 35px;
