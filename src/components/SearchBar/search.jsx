@@ -5,6 +5,9 @@ import { SearchList } from "./searchList/SearchList";
 import axios from 'axios';
 import { SelectedContent } from "./selectedContent/SelectedContent";
 
+// method 1: local filteration
+// method 2: Filter through API 
+
 const API_URL =
     "https://api.themoviedb.org/3/search/movie?api_key=d3449ff6ec0c027623bf6b6f5fff78b3&language=en-US&page=1&include_adult=false";
 
@@ -12,26 +15,37 @@ export const Search = () => {
     //              --------state------------
     const [searchInputValue, setSearchInputvalue] = useState("");
     const [searchListValue, setSearchListValue] = useState([]);
-    const [filteredList, setFilteredList] = useState([]);
     const [selected, setSelected] = useState(false);
 
     //              ---------API Call--------
     const fetchSearchList = async () => {
-        // const response= await axios(API_URL+'&query'+searchInputValue); //old method
-        // const response= await axios(`${API_URL}&query${searchInputValue}`); // template literals method
-        const response = await axios(API_URL, {
-            params: {
-                query: 'movie',
-            }
-        });                                         // best practice
+        try {
+            // const response= await axios(API_URL+'&query'+searchInputValue); //old method
+            // const response= await axios(`${API_URL}&query${searchInputValue}`); // template literals method
+            const response = await axios(API_URL, {
+                params: {
+                    query: searchInputValue,
+                }
+            });                                         // best practice
+            setSearchListValue(response.data.results);
 
-        setSearchListValue(response.data.results);
-        setFilteredList(response.data.results);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     useEffect(() => {
-        fetchSearchList();
-    }, [])
+        const APIcall = setTimeout(() => {
+            console.log("mount")
+            fetchSearchList();
+        }, 300);
+
+        return () => {
+            console.log("unMount");
+            clearTimeout(APIcall);
+        }
+    }, [searchInputValue])
+
 
     //input-box handling
     const handleChange = (event) => {
@@ -39,13 +53,12 @@ export const Search = () => {
         const newFilteredList = searchListValue.filter((data) => {
             return data.title.toLowerCase().includes(event.target.value.toLowerCase());
         });
-        setFilteredList(newFilteredList);
+        setSearchListValue(newFilteredList);
     }
 
     //clear button handling
     const handleClearButton = () => {
         setSearchInputvalue("");
-        setFilteredList(searchListValue);
     }
 
     // selected content handling
@@ -81,7 +94,7 @@ export const Search = () => {
                     </div>
 
                 </SelectedContent>
-                    : <SearchList searchListValue={searchListValue} filteredList={filteredList} />}
+                    : <SearchList searchListValue={searchListValue} />}
 
             </div>
         </div>
