@@ -3,7 +3,6 @@ import "./Search.css";
 import { SearchInput } from "./searchInput/SearchInput";
 import { SearchList } from "./searchList/SearchList";
 import axios from 'axios';
-import { SelectedContent } from "./selectedContent/SelectedContent";
 
 // method 1: local filteration
 // method 2: Filter through API 
@@ -15,7 +14,6 @@ export const Search = () => {
     //              --------state------------
     const [searchInputValue, setSearchInputvalue] = useState("");
     const [searchListValue, setSearchListValue] = useState([]);
-    const [selected, setSelected] = useState(false);
 
     //              ---------API Call--------
     const fetchSearchList = async () => {
@@ -47,6 +45,8 @@ export const Search = () => {
     }, [searchInputValue])
 
 
+
+
     //input-box handling
     const handleChange = (event) => {
         setSearchInputvalue(event.target.value);
@@ -61,18 +61,7 @@ export const Search = () => {
         setSearchInputvalue("");
     }
 
-    // selected content handling
-    // const handleSeclectedContent = (event) => {
-    //     <div className="selected-content">
-    //         <img src={event.target.innerHTML} />
-    //         <p> {event.target.innerText}</p>
 
-    //     </div>
-
-    //     // console.log(event.target.innerText);
-    //     console.log(event.target.innerHTML);
-    //     setSelected(true);
-    // }
 
 
     return (
@@ -85,17 +74,9 @@ export const Search = () => {
 
                 <SearchInput searchInputValue={searchInputValue}
                     handleChange={handleChange}
-                    handleClearButton={handleClearButton} />
-
-                {selected ? <SelectedContent>
-                    <div className="selected-content">
-                        <img src="" alt="selected-content" />
-                        <p> Selected content</p>
-                    </div>
-
-                </SelectedContent>
-                    : <SearchList searchListValue={searchListValue} />}
-
+                    handleClearButton={handleClearButton}
+                />
+                <SearchList searchListValue={searchListValue} />
             </div>
         </div>
     );

@@ -1,25 +1,19 @@
 .search-container {
-	width: 600px; /* doubt-- responsiveness */
+	width: 800px; /* doubt-- responsiveness */
 	/* width: 100%; */
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
+	font-size: 18px;
+	display: flex;
+	flex-direction: column;
+    overflow: hidden;
 }
 .search-container .title {
-    padding-left: 10px;
-    /* background-color: #ffffff3b; */
+	padding-left: 10px;
+	/* background-color: #ffffff3b; */
 	display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 30px;
 }
-.search-container .title p{
-    font-size: 30px;
-}
-.search-container .title i{
-}
-.selected-content{
-    position: absolute;
-    width: 300px;
-    height: 300px;
+.search-container .title p {
+	font-size: 30px;
 }
